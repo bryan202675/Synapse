@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synapse AI — Operational Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--cream:#f5f0e8;
+--parchment:#ede7d9;
+--warm-white:#faf8f3;
+--ink:#1a1714;
+--ink-soft:#3d3830;
+--ink-muted:#7a7267;
+--ink-faint:#b5aea3;
+--sage:#3d5a47;
+--sage-light:#e8efe9;
+--sage-mid:#c5d8c9;
+--terra:#c45c2a;
+--terra-light:#f9ede6;
+--gold:#b08d57;
+--gold-light:#f5edd9;
+--border:#ddd6ca;
+--border-dark:#c8bfb4;
+--shadow:rgba(26,23,20,0.08);
+--font-display:'Cormorant Garamond',serif;
+--font-body:'Epilogue',sans-serif;
+--ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--warm-white);color:var(--ink);font-family:var(--font-body);font-weight:400;line-height:1.6;overflow-x:hidden}
+::selection{background:var(--gold-light);color:var(--ink)}
+
+nav{
+position:fixed;top:0;left:0;right:0;z-index:100;
+padding:0 48px;height:68px;
+display:flex;align-items:center;justify-content:space-between;
+background:rgba(245,240,232,0.88);
+backdrop-filter:blur(16px);
+border-bottom:1px solid var(--border);
+transition:all 0.4s var(--ease-out);
+}
+nav.scrolled{background:rgba(250,248,243,0.96);box-shadow:0 1px 24px var(--shadow)}
+.nav-logo{
+display:flex;align-items:center;gap:10px;
+font-family:var(--font-display);font-size:22px;font-weight:500;
+color:var(--ink);text-decoration:none;letter-spacing:0.01em;
+}
+.logo-mark{
+width:30px;height:30px;border-radius:50%;
+background:var(--sage);
+display:flex;align-items:center;justify-content:center;
+}
+.logo-mark svg{width:14px;height:14px}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{
+color:var(--ink-muted);font-size:13.5px;font-weight:400;
+text-decoration:none;letter-spacing:0.03em;
+transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.btn-nav-ghost{
+background:transparent;border:1px solid var(--border-dark);
+color:var(--ink-soft);padding:9px 20px;border-radius:6px;
+font-family:var(--font-body);font-size:13px;font-weight:400;
+text-decoration:none;letter-spacing:0.02em;
+transition:all 0.2s;
+}
+.btn-nav-ghost:hover{border-color:var(--ink-muted);color:var(--ink);background:var(--parchment)}
+.btn-nav-fill{
+background:var(--sage);color:#fff;
+padding:9px 22px;border-radius:6px;
+font-family:var(--font-body);font-size:13px;font-weight:500;
+text-decoration:none;letter-spacing:0.02em;
+transition:all 0.25s var(--ease-out);
+border:1px solid var(--sage);
+}
+.btn-nav-fill:hover{background:var(--ink);border-color:var(--ink);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,23,20,0.2)}
+
+#hero{
+padding:148px 48px 100px;
+background:var(--cream);
+position:relative;overflow:hidden;
+}
+.hero-texture{
+position:absolute;inset:0;pointer-events:none;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+opacity:0.6;
+}
+.hero-rule{
+position:absolute;top:0;right:140px;bottom:0;width:1px;
+background:linear-gradient(180deg,transparent,var(--border) 20%,var(--border) 80%,transparent);
+}
+.hero-layout{
+max-width:1200px;margin:0 auto;
+display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center;
+position:relative;z-index:2;
+}
+.hero-left{}
+.hero-eyebrow{
+display:inline-flex;align-items:center;gap:10px;
+margin-bottom:28px;
+}
+.eyebrow-line{width:32px;height:1px;background:var(--terra)}
+.eyebrow-text{
+font-family:var(--font-body);font-size:11px;font-weight:500;
+color:var(--terra);letter-spacing:0.14em;text-transform:uppercase;
+}
+h1{
+font-family:var(--font-display);
+font-size:clamp(56px,6.5vw,88px);
+line-height:1.01;
+font-weight:400;letter-spacing:-0.01em;
+animation:fadeIn 1s var(--ease-out) 0.1s both;
+}
+h1 em{font-style:italic;color:var(--sage)}
+.hero-sub{
+font-size:17px;color:var(--ink-soft);
+font-weight:300;line-height:1.75;
+max-width:480px;margin-top:28px;
+animation:fadeIn 1s var(--ease-out) 0.25s both;
+}
+.hero-actions{
+display:flex;align-items:center;gap:20px;
+margin-top:44px;
+animation:fadeIn 1s var(--ease-out) 0.4s both;
+}
+.btn-primary-lg{
+display:inline-flex;align-items:center;gap:12px;
+background:var(--sage);color:#fff;
+padding:16px 32px;border-radius:8px;
+font-family:var(--font-body);font-size:15px;font-weight:500;
+text-decoration:none;letter-spacing:0.02em;
+transition:all 0.3s var(--ease-out);border:1px solid var(--sage);
+}
+.btn-primary-lg:hover{background:var(--ink);border-color:var(--ink);transform:translateY(-2px);box-shadow:0 12px 40px rgba(26,23,20,0.22)}
+.btn-secondary-lg{
+display:inline-flex;align-items:center;gap:10px;
+color:var(--ink-soft);font-size:15px;font-weight:400;
+text-decoration:none;letter-spacing:0.02em;
+transition:color 0.2s;
+}
+.btn-secondary-lg:hover{color:var(--ink)}
+.btn-secondary-lg span{font-size:18px;transition:transform 0.2s}
+.btn-secondary-lg:hover span{transform:translateX(3px)}
+.hero-proof{
+display:flex;align-items:center;gap:16px;
+margin-top:52px;
+animation:fadeIn 1s var(--ease-out) 0.55s both;
+}
+.proof-divider{width:1px;height:28px;background:var(--border-dark)}
+.proof-item{font-size:13px;color:var(--ink-muted)}
+.proof-item strong{color:var(--ink);font-weight:600}
+.hero-right{
+animation:slideLeft 1s var(--ease-out) 0.2s both;
+}
+.hero-card{
+background:var(--warm-white);
+border:1px solid var(--border);
+border-radius:16px;overflow:hidden;
+box-shadow:0 4px 40px var(--shadow),0 1px 0 rgba(255,255,255,0.8) inset;
+}
+.hc-top{
+background:var(--parchment);border-bottom:1px solid var(--border);
+padding:18px 22px;
+display:flex;align-items:center;justify-content:space-between;
+}
+.hc-dots{display:flex;gap:6px}
+.hc-dots span{width:9px;height:9px;border-radius:50%}
+.hc-dots span:nth-child(1){background:#e8948a}
+.hc-dots span:nth-child(2){background:#e8c88a}
+.hc-dots span:nth-child(3){background:#8ab88a}
+.hc-title{font-family:var(--font-body);font-size:11px;color:var(--ink-muted);letter-spacing:0.08em;text-transform:uppercase}
+.hc-body{padding:22px}
+.hc-insight{
+background:var(--sage-light);
+border:1px solid var(--sage-mid);
+border-radius:10px;padding:16px;margin-bottom:16px;
+}
+.hci-tag{
+font-size:10px;font-weight:600;color:var(--sage);
+letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;
+display:flex;align-items:center;gap:6px;
+}
+.hci-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sage);display:block}
+.hci-text{font-size:13px;color:var(--ink-soft);line-height:1.6}
+.hci-text strong{color:var(--ink)}
+.hc-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.hc-metric{
+background:var(--parchment);border:1px solid var(--border);
+border-radius:8px;padding:14px;
+}
+.hcm-label{font-size:10px;color:var(--ink-muted);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px}
+.hcm-val{font-family:var(--font-display);font-size:26px;font-weight:500;color:var(--ink)}
+.hcm-delta{font-size:11px;color:#5a8a5a;margin-top:2px}
+.hc-bar-row{display:flex;flex-direction:column;gap:8px}
+.hc-bar-item{display:flex;align-items:center;gap:10px}
+.hcbi-label{font-size:11px;color:var(--ink-muted);width:60px;flex-shrink:0}
+.hcbi-track{
+flex:1;height:5px;background:var(--parchment);
+border-radius:3px;overflow:hidden;
+}
+.hcbi-fill{
+height:100%;border-radius:3px;
+background:linear-gradient(90deg,var(--sage),var(--gold));
+}
+.hcbi-val{font-size:11px;color:var(--ink-muted);width:32px;text-align:right;flex-shrink:0}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+
+.brand-strip{
+background:var(--parchment);
+border-top:1px solid var(--border);
+border-bottom:1px solid var(--border);
+padding:22px 48px;
+display:flex;align-items:center;gap:0;
+overflow:hidden;
+}
+.brand-label{
+font-size:11px;color:var(--ink-faint);letter-spacing:0.1em;text-transform:uppercase;
+white-space:nowrap;margin-right:40px;flex-shrink:0;
+}
+.brand-track{
+display:flex;gap:64px;
+animation:brandsScroll 30s linear infinite;
+width:max-content;
+}
+.brand-item{
+font-family:var(--font-display);font-size:18px;font-weight:500;
+color:var(--ink-faint);white-space:nowrap;letter-spacing:0.02em;
+transition:color 0.2s;
+}
+@keyframes brandsScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding:112px 48px}
+.container{max-width:1200px;margin:0 auto}
+
+.section-label{
+display:inline-flex;align-items:center;gap:10px;
+margin-bottom:20px;
+}
+.label-num{
+font-family:var(--font-display);font-size:13px;font-style:italic;
+color:var(--ink-faint);
+}
+.label-text{
+font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+color:var(--ink-muted);
+}
+.section-title{
+font-family:var(--font-display);
+font-size:clamp(40px,5vw,66px);
+font-weight:400;line-height:1.06;letter-spacing:-0.01em;
+}
+.section-title em{font-style:italic;color:var(--sage)}
+.section-body{
+font-size:17px;color:var(--ink-soft);font-weight:300;
+line-height:1.75;max-width:500px;margin-top:18px;
+}
+
+#features{background:var(--warm-white)}
+.features-intro{
+display:grid;grid-template-columns:1fr 1fr;gap:80px;
+align-items:end;margin-bottom:72px;
+}
+.features-intro-right{
+display:flex;flex-direction:column;align-items:flex-end;
+}
+.features-stat-pair{
+display:flex;gap:48px;margin-bottom:32px;
+}
+.fsp-item{text-align:right}
+.fsp-num{
+font-family:var(--font-display);font-size:54px;font-style:italic;
+font-weight:400;color:var(--ink);line-height:1;
+}
+.fsp-label{font-size:13px;color:var(--ink-muted);margin-top:4px}
+.features-divider{width:100%;height:1px;background:var(--border)}
+.feat-grid{
+display:grid;grid-template-columns:repeat(3,1fr);
+border:1px solid var(--border);border-radius:16px;
+overflow:hidden;
+}
+.feat-card{
+padding:40px 36px;
+border-right:1px solid var(--border);
+border-bottom:1px solid var(--border);
+position:relative;
+transition:background 0.35s var(--ease-out);
+}
+.feat-card:nth-child(3n){border-right:none}
+.feat-card:nth-child(4),.feat-card:nth-child(5),.feat-card:nth-child(6){border-bottom:none}
+.feat-card:hover{background:var(--parchment)}
+.feat-num{
+font-family:var(--font-display);font-size:13px;font-style:italic;
+color:var(--ink-faint);margin-bottom:28px;display:block;
+}
+.feat-icon{
+width:48px;height:48px;border-radius:12px;
+border:1px solid var(--border-dark);
+background:var(--warm-white);
+display:flex;align-items:center;justify-content:center;
+font-size:22px;margin-bottom:22px;
+transition:all 0.3s var(--ease-out);
+}
+.feat-card:hover .feat-icon{background:var(--sage);border-color:var(--sage);transform:rotate(-6deg) scale(1.05)}
+.feat-card:hover .feat-icon svg path{stroke:#fff}
+.feat-title{font-size:17px;font-weight:500;margin-bottom:12px;letter-spacing:-0.01em}
+.feat-desc{font-size:14px;color:var(--ink-muted);line-height:1.7}
+.feat-link{
+display:inline-flex;align-items:center;gap:6px;
+margin-top:20px;font-size:13px;color:var(--sage);
+font-weight:500;text-decoration:none;letter-spacing:0.02em;
+transition:gap 0.2s;
+}
+.feat-link:hover{gap:10px}
+
+#process{background:var(--parchment)}
+.process-layout{
+display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;
+}
+.process-steps{margin-top:48px}
+.proc-step{
+display:flex;gap:24px;
+padding:28px 0;
+border-bottom:1px solid var(--border);
+cursor:default;
+}
+.proc-step:first-child{padding-top:0}
+.proc-step:last-child{border-bottom:none}
+.ps-marker{
+width:36px;height:36px;border-radius:50%;
+background:var(--warm-white);border:1px solid var(--border-dark);
+display:flex;align-items:center;justify-content:center;
+font-family:var(--font-display);font-size:14px;font-style:italic;
+color:var(--ink-muted);flex-shrink:0;
+transition:all 0.25s var(--ease-out);
+}
+.proc-step:hover .ps-marker{background:var(--sage);border-color:var(--sage);color:#fff}
+.ps-content{}
+.ps-title{font-size:16px;font-weight:500;margin-bottom:6px}
+.ps-desc{font-size:14px;color:var(--ink-muted);line-height:1.65}
+.process-visual{
+position:relative;
+}
+.pv-card{
+background:var(--warm-white);border:1px solid var(--border);
+border-radius:16px;padding:28px;
+box-shadow:0 8px 48px var(--shadow);
+}
+.pvc-header{
+display:flex;align-items:center;justify-content:space-between;
+margin-bottom:24px;
+}
+.pvc-title{font-size:15px;font-weight:500}
+.pvc-badge{
+background:var(--sage-light);color:var(--sage);
+border:1px solid var(--sage-mid);
+font-size:11px;font-weight:500;padding:4px 10px;border-radius:100px;
+letter-spacing:0.04em;
+}
+.pvc-signal{
+display:flex;flex-direction:column;gap:10px;
+}
+.pvcs-row{
+display:flex;align-items:center;gap:12px;
+padding:12px 14px;border-radius:8px;
+background:var(--parchment);border:1px solid var(--border);
+transition:border-color 0.2s;
+}
+.pvcs-row:first-child{
+background:var(--sage-light);border-color:var(--sage-mid);
+}
+.pvcs-icon{
+width:32px;height:32px;border-radius:8px;
+background:var(--warm-white);border:1px solid var(--border);
+display:flex;align-items:center;justify-content:center;
+font-size:14px;flex-shrink:0;
+}
+.pvcs-row:first-child .pvcs-icon{background:var(--sage);font-size:12px}
+.pvcs-text{flex:1;font-size:13px;color:var(--ink-soft)}
+.pvcs-meta{font-size:11px;color:var(--ink-faint);white-space:nowrap}
+.pv-float{
+position:absolute;bottom:-24px;right:-24px;
+background:var(--warm-white);border:1px solid var(--border);
+border-radius:12px;padding:16px 20px;
+box-shadow:0 4px 24px var(--shadow);
+display:flex;align-items:center;gap:12px;
+}
+.pvf-icon{
+width:36px;height:36px;border-radius:8px;
+background:var(--terra-light);
+display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.pvf-label{font-size:12px;color:var(--ink-muted)}
+.pvf-val{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--terra)}
+
+#pricing{background:var(--warm-white)}
+.pricing-header{
+display:grid;grid-template-columns:1fr 1fr;gap:80px;
+align-items:end;margin-bottom:56px;
+}
+.pricing-toggle{
+display:flex;align-items:center;gap:0;
+background:var(--parchment);border:1px solid var(--border);
+border-radius:8px;padding:4px;
+margin-top:28px;width:fit-content;
+}
+.pt-opt{
+padding:9px 22px;border-radius:6px;
+font-size:13px;font-weight:400;color:var(--ink-muted);
+cursor:pointer;transition:all 0.2s;letter-spacing:0.02em;
+}
+.pt-opt.active{background:var(--warm-white);color:var(--ink);font-weight:500;box-shadow:0 1px 6px var(--shadow)}
+.pt-save{
+background:var(--terra-light);color:var(--terra);
+font-size:10px;font-weight:600;padding:2px 7px;
+border-radius:4px;letter-spacing:0.05em;margin-left:6px;
+}
+.pricing-note{font-size:14px;color:var(--ink-muted);line-height:1.6}
+.pricing-cards{
+display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.price-card{
+background:var(--warm-white);
+border:1px solid var(--border);
+border-radius:16px;padding:36px 32px;
+position:relative;overflow:hidden;
+transition:all 0.35s var(--ease-out);
+}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px var(--shadow)}
+.price-card.featured{
+background:var(--sage);
+border-color:var(--sage);
+color:#fff;
+}
+.pc-flag{
+position:absolute;top:24px;right:24px;
+font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+padding:4px 10px;border-radius:4px;
+background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);
+}
+.pc-name{
+font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+color:var(--ink-muted);margin-bottom:16px;
+}
+.price-card.featured .pc-name{color:rgba(255,255,255,0.6)}
+.pc-price{
+font-family:var(--font-display);font-size:54px;font-weight:400;
+line-height:1;color:var(--ink);margin-bottom:6px;
+}
+.pc-price sup{font-size:22px;vertical-align:super}
+.price-card.featured .pc-price{color:#fff}
+.pc-period{font-size:13px;color:var(--ink-muted);margin-bottom:6px}
+.price-card.featured .pc-period{color:rgba(255,255,255,0.6)}
+.pc-divider{height:1px;background:var(--border);margin:24px 0}
+.price-card.featured .pc-divider{background:rgba(255,255,255,0.15)}
+.pc-features{list-style:none;display:flex;flex-direction:column;gap:13px}
+.pc-features li{
+font-size:14px;color:var(--ink-soft);
+display:flex;align-items:flex-start;gap:10px;
+line-height:1.5;
+}
+.price-card.featured .pc-features li{color:rgba(255,255,255,0.8)}
+.pc-features li::before{
+content:'';width:14px;height:14px;border-radius:50%;
+background:var(--sage-light);border:1px solid var(--sage-mid);
+flex-shrink:0;margin-top:2px;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7l3 3 5-5' stroke='%233d5a47' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+background-size:contain;
+}
+.price-card.featured .pc-features li::before{
+background-color:rgba(255,255,255,0.2);
+border-color:rgba(255,255,255,0.3);
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7l3 3 5-5' stroke='white' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.pc-features li.off{opacity:0.35}
+.pc-cta{
+display:block;text-align:center;
+margin-top:28px;padding:13px 20px;
+border-radius:8px;font-size:14px;font-weight:500;
+text-decoration:none;letter-spacing:0.03em;
+transition:all 0.25s var(--ease-out);
+}
+.pc-cta.outline{
+border:1px solid var(--border-dark);color:var(--ink);
+background:transparent;
+}
+.pc-cta.outline:hover{border-color:var(--sage);color:var(--sage);background:var(--sage-light)}
+.pc-cta.white{
+background:#fff;color:var(--sage);font-weight:600;
+}
+.pc-cta.white:hover{background:var(--parchment);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+
+#testimonials{background:var(--parchment)}
+.testi-header{
+display:grid;grid-template-columns:1fr 1fr;
+gap:80px;align-items:end;margin-bottom:64px;
+}
+.testi-grid{
+display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.testi-card{
+background:var(--warm-white);border:1px solid var(--border);
+border-radius:14px;padding:32px 28px;
+transition:all 0.3s var(--ease-out);
+}
+.testi-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px var(--shadow)}
+.testi-card.featured{
+background:var(--ink);border-color:var(--ink);
+grid-row:span 1;
+}
+.tc-quote{
+font-family:var(--font-display);font-size:15px;font-style:italic;
+color:var(--ink-soft);line-height:1.8;margin-bottom:24px;
+}
+.testi-card.featured .tc-quote{color:rgba(245,240,232,0.8)}
+.tc-author{
+display:flex;align-items:center;gap:14px;
+border-top:1px solid var(--border);padding-top:20px;
+}
+.testi-card.featured .tc-author{border-top-color:rgba(255,255,255,0.1)}
+.tc-avatar{
+width:40px;height:40px;border-radius:50%;
+background:var(--sage-light);border:1px solid var(--sage-mid);
+display:flex;align-items:center;justify-content:center;
+font-family:var(--font-display);font-size:16px;font-weight:500;
+color:var(--sage);flex-shrink:0;
+}
+.testi-card.featured .tc-avatar{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:#fff}
+.tc-name{font-size:14px;font-weight:500}
+.testi-card.featured .tc-name{color:#fff}
+.tc-role{font-size:12px;color:var(--ink-faint)}
+.testi-card.featured .tc-role{color:rgba(245,240,232,0.45)}
+.tc-stars{color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:18px}
+
+#cta-section{
+background:var(--cream);
+border-top:1px solid var(--border);
+}
+.cta-layout{
+display:grid;grid-template-columns:1fr 1fr;gap:100px;
+align-items:center;
+}
+.cta-left .section-title{font-size:clamp(44px,5.5vw,72px)}
+.cta-left .section-body{max-width:440px}
+.cta-actions{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
+.cta-fine{font-size:12px;color:var(--ink-faint);margin-top:16px;letter-spacing:0.02em}
+.cta-right{
+display:flex;flex-direction:column;gap:16px;
+}
+.cta-card{
+background:var(--warm-white);border:1px solid var(--border);
+border-radius:12px;padding:24px;
+display:flex;align-items:flex-start;gap:16px;
+transition:border-color 0.2s,box-shadow 0.2s;
+}
+.cta-card:hover{border-color:var(--border-dark);box-shadow:0 4px 20px var(--shadow)}
+.cc-icon{
+width:44px;height:44px;border-radius:10px;
+flex-shrink:0;display:flex;align-items:center;
+justify-content:center;font-size:20px;
+}
+.cc-icon.sage{background:var(--sage-light);border:1px solid var(--sage-mid)}
+.cc-icon.terra{background:var(--terra-light)}
+.cc-icon.gold{background:var(--gold-light)}
+.cc-label{font-size:15px;font-weight:500;margin-bottom:4px}
+.cc-desc{font-size:13px;color:var(--ink-muted);line-height:1.6}
+
+footer{
+background:var(--ink);
+padding:80px 48px 48px;
+}
+.footer-grid{
+max-width:1200px;margin:0 auto;
+display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:64px;
+margin-bottom:64px;
+}
+.footer-brand-logo{
+display:flex;align-items:center;gap:10px;
+font-family:var(--font-display);font-size:22px;font-weight:500;
+color:var(--cream);margin-bottom:16px;
+}
+.footer-brand-logo .logo-mark{background:var(--sage)}
+.footer-tagline{font-size:14px;color:rgba(245,240,232,0.45);line-height:1.7;max-width:280px;margin-bottom:28px}
+.footer-soc{display:flex;gap:8px}
+.fsoc{
+width:36px;height:36px;border-radius:8px;
+border:1px solid rgba(255,255,255,0.1);
+display:flex;align-items:center;justify-content:center;
+color:rgba(245,240,232,0.4);font-size:13px;text-decoration:none;
+transition:all 0.2s;
+}
+.fsoc:hover{border-color:rgba(255,255,255,0.3);color:var(--cream)}
+.footer-col h5{
+font-size:11px;font-weight:500;letter-spacing:0.12em;
+text-transform:uppercase;color:rgba(245,240,232,0.35);
+margin-bottom:20px;
+}
+.footer-col a{
+display:block;font-size:14px;color:rgba(245,240,232,0.55);
+text-decoration:none;margin-bottom:12px;
+transition:color 0.2s;
+}
+.footer-col a:hover{color:var(--cream)}
+.footer-bottom{
+max-width:1200px;margin:0 auto;
+display:flex;align-items:center;justify-content:space-between;
+padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);
+}
+.footer-copy{font-size:12px;color:rgba(245,240,232,0.3);letter-spacing:0.03em}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-size:12px;color:rgba(245,240,232,0.3);text-decoration:none;transition:color 0.2s}
+.footer-legal a:hover{color:rgba(245,240,232,0.6)}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s var(--ease-out),transform 0.8s var(--ease-out)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity 0.8s var(--ease-out),transform 0.8s var(--ease-out)}
+.reveal-l.visible{opacity:1;transform:translateX(0)}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity 0.8s var(--ease-out),transform 0.8s var(--ease-out)}
+.reveal-r.visible{opacity:1;transform:translateX(0)}
+.d1{transition-delay:0.08s}.d2{transition-delay:0.16s}.d3{transition-delay:0.24s}
+.d4{transition-delay:0.32s}.d5{transition-delay:0.40s}.d6{transition-delay:0.48s}
+
+@media(max-width:960px){
+nav{padding:0 24px}
+#hero{padding:120px 24px 80px}
+.hero-layout{grid-template-columns:1fr;gap:56px}
+section{padding:80px 24px}
+.features-intro{grid-template-columns:1fr;gap:40px}
+.features-intro-right{align-items:flex-start}
+.feat-grid{grid-template-columns:1fr 1fr}
+.feat-card:nth-child(3n){border-right:1px solid var(--border)}
+.feat-card:nth-child(2n){border-right:none}
+.feat-card:nth-child(5),.feat-card:nth-child(6){border-bottom:none}
+.feat-card:nth-child(4){border-bottom:1px solid var(--border)}
+.process-layout{grid-template-columns:1fr;gap:56px}
+.pricing-header{grid-template-columns:1fr;gap:32px}
+.pricing-cards{grid-template-columns:1fr}
+.testi-header{grid-template-columns:1fr;gap:32px}
+.testi-grid{grid-template-columns:1fr}
+.cta-layout{grid-template-columns:1fr;gap:56px}
+.footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+.footer-bottom{flex-direction:column;gap:16px;text-align:center}
+}
+@media(max-width:600px){
+.nav-links{display:none}
+.feat-grid{grid-template-columns:1fr}
+.feat-card:nth-child(n){border-right:none}
+.hero-proof{flex-direction:column;align-items:flex-start;gap:10px}
+.proof-divider{display:none}
+.footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="4" cy="4" r="2" fill="white"/>
+        <circle cx="10" cy="10" r="2" fill="white"/>
+        <path d="M4 4 Q7 3 10 10" stroke="white" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
+    Synapse
+  </a>
+  <div class="nav-links">
+    <a href="#features">Platform</a>
+    <a href="#process">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testimonials">Stories</a>
+    <a href="#">Docs</a>
+  </div>
+  <div class="nav-cta">
+    <a href="#" class="btn-nav-ghost">Sign in</a>
+    <a href="#pricing" class="btn-nav-fill">Try free →</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-texture"></div>
+  <div class="hero-rule"></div>
+  <div class="hero-layout container">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">Operational Intelligence</span>
+      </div>
+      <h1>Make better<br>decisions,<br><em>every day.</em></h1>
+      <p class="hero-sub">Synapse connects all your product data and surfaces the signals that actually matter — so your team can move with clarity instead of guessing.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary-lg">
+          Start free trial
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#features" class="btn-secondary-lg">
+          Explore the platform <span>→</span>
+        </a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item">Trusted by <strong>4,200+</strong> teams</div>
+        <div class="proof-divider"></div>
+        <div class="proof-item"><strong>4.9 / 5</strong> average rating</div>
+        <div class="proof-divider"></div>
+        <div class="proof-item"><strong>SOC 2</strong> certified</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hc-top">
+          <div class="hc-dots"><span></span><span></span><span></span></div>
+          <div class="hc-title">Synapse Dashboard</div>
+        </div>
+        <div class="hc-body">
+          <div class="hc-insight">
+            <div class="hci-tag">Live AI Insight</div>
+            <div class="hci-text"><strong>Cohort B</strong> showing 3× engagement after onboarding update. Recommend rolling out to all segments within 48h for projected <strong>+18% conversion</strong>.</div>
+          </div>
+          <div class="hc-metrics">
+            <div class="hc-metric">
+              <div class="hcm-label">Active users</div>
+              <div class="hcm-val">124.8K</div>
+              <div class="hcm-delta">↑ 18.4% this week</div>
+            </div>
+            <div class="hc-metric">
+              <div class="hcm-label">Conversion</div>
+              <div class="hcm-val">7.34%</div>
+              <div class="hcm-delta">↑ 2.1% improvement</div>
+            </div>
+          </div>
+          <div class="hc-bar-row">
+            <div class="hc-bar-item">
+              <span class="hcbi-label">Revenue</span>
+              <div class="hcbi-track"><div class="hcbi-fill" style="width:91%"></div></div>
+              <span class="hcbi-val">91%</span>
+            </div>
+            <div class="hc-bar-item">
+              <span class="hcbi-label">Retention</span>
+              <div class="hcbi-track"><div class="hcbi-fill" style="width:78%"></div></div>
+              <span class="hcbi-val">78%</span>
+            </div>
+            <div class="hc-bar-item">
+              <span class="hcbi-label">NPS</span>
+              <div class="hcbi-track"><div class="hcbi-fill" style="width:84%"></div></div>
+              <span class="hcbi-val">84%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="brand-strip">
+  <div class="brand-label">Trusted by teams at</div>
+  <div class="brand-track" id="brandTrack">
+    <div class="brand-item">Meridian</div>
+    <div class="brand-item">Parcel Labs</div>
+    <div class="brand-item">Flux.io</div>
+    <div class="brand-item">Stellar HQ</div>
+    <div class="brand-item">Opal</div>
+    <div class="brand-item">Nimbus</div>
+    <div class="brand-item">Cascade</div>
+    <div class="brand-item">Folio</div>
+    <div class="brand-item">Meridian</div>
+    <div class="brand-item">Parcel Labs</div>
+    <div class="brand-item">Flux.io</div>
+    <div class="brand-item">Stellar HQ</div>
+    <div class="brand-item">Opal</div>
+    <div class="brand-item">Nimbus</div>
+    <div class="brand-item">Cascade</div>
+    <div class="brand-item">Folio</div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="container">
+    <div class="features-intro">
+      <div class="reveal-l">
+        <div class="section-label">
+          <span class="label-num">01</span>
+          <span class="label-text">The Platform</span>
+        </div>
+        <h2 class="section-title">Built for teams<br>that can't wait.</h2>
+        <p class="section-body">Six core capabilities that transform how your team sees, thinks, and acts on data — without hiring a data science team.</p>
+      </div>
+      <div class="features-intro-right reveal-r">
+        <div class="features-stat-pair">
+          <div class="fsp-item">
+            <div class="fsp-num">67%</div>
+            <div class="fsp-label">faster decisions</div>
+          </div>
+          <div class="fsp-item">
+            <div class="fsp-num">4.1×</div>
+            <div class="fsp-label">average ROI</div>
+          </div>
+        </div>
+        <div class="features-divider"></div>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal d1">
+        <span class="feat-num">01</span>
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11h16M11 3l8 8-8 8" stroke="#3d5a47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feat-title">Real-time Signal Engine</div>
+        <div class="feat-desc">Ingests millions of events per second across your entire stack. No sampling, no lag — pure fidelity with sub-second delivery.</div>
+        <a href="#" class="feat-link">Learn more →</a>
+      </div>
+      <div class="feat-card reveal d2">
+        <span class="feat-num">02</span>
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#3d5a47" stroke-width="1.5"/><path d="M11 7v4l3 3" stroke="#3d5a47" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feat-title">Predictive Intelligence</div>
+        <div class="feat-desc">ML models trained on billions of interactions forecast churn, drops, and opportunities 72 hours ahead of the curve.</div>
+        <a href="#" class="feat-link">Learn more →</a>
+      </div>
+      <div class="feat-card reveal d3">
+        <span class="feat-num">03</span>
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 8h14M4 14h14M8 4v14M14 4v14" stroke="#3d5a47" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feat-title">Universal Data Mesh</div>
+        <div class="feat-desc">200+ native integrations. Connect Salesforce, Jira, Stripe, BigQuery, and more in minutes. No data engineers needed.</div>
+        <a href="#" class="feat-link">Learn more →</a>
+      </div>
+      <div class="feat-card reveal d4">
+        <span class="feat-num">04</span>
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3l2.5 5.5L19 9.5l-4 4 1 5.5-5-2.5-5 2.5 1-5.5-4-4 5.5-1L11 3z" stroke="#3d5a47" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feat-title">Insight Orchestration</div>
+        <div class="feat-desc">Routes critical insights to the right person at the right time via Slack, email, or webhooks. Maximum signal, zero noise.</div>
+        <a href="#" class="feat-link">Learn more →</a>
+      </div>
+      <div class="feat-card reveal d5">
+        <span class="feat-num">05</span>
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" stroke="#3d5a47" stroke-width="1.5"/><path d="M8 11l2 2 4-4" stroke="#3d5a47" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feat-title">Enterprise Security</div>
+        <div class="feat-desc">SOC 2 Type II, GDPR, HIPAA compliant. End-to-end encryption, SSO, RBAC, audit logs. Security you can prove to your customers.</div>
+        <a href="#" class="feat-link">Learn more →</a>
+      </div>
+      <div class="feat-card reveal d6">
+        <span class="feat-num">06</span>
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 6h14M4 11h10M4 16h6" stroke="#3d5a47" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feat-title">Custom Decision Models</div>
+        <div class="feat-desc">Train Synapse on your specific business logic. Define KPIs, scoring criteria, and thresholds that match how your business actually works.</div>
+        <a href="#" class="feat-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <div class="process-layout">
+      <div>
+        <div class="section-label reveal">
+          <span class="label-num">02</span>
+          <span class="label-text">How it works</span>
+        </div>
+        <h2 class="section-title reveal">From messy data<br>to <em>clear action.</em></h2>
+        <div class="process-steps">
+          <div class="proc-step reveal d1">
+            <div class="ps-marker">1</div>
+            <div class="ps-content">
+              <div class="ps-title">Connect your entire stack</div>
+              <div class="ps-desc">One-click integrations pull data from every tool your team uses. No warehouses, no data engineers, no waiting.</div>
+            </div>
+          </div>
+          <div class="proc-step reveal d2">
+            <div class="ps-marker">2</div>
+            <div class="ps-content">
+              <div class="ps-title">Define what success looks like</div>
+              <div class="ps-desc">Set your KPIs, risk thresholds, and business context. Synapse learns your specific model of success and adapts over time.</div>
+            </div>
+          </div>
+          <div class="proc-step reveal d3">
+            <div class="ps-marker">3</div>
+            <div class="ps-content">
+              <div class="ps-title">Receive live intelligence</div>
+              <div class="ps-desc">AI surfaces insights, anomalies, and predictions automatically — delivered where your team already works.</div>
+            </div>
+          </div>
+          <div class="proc-step reveal d4">
+            <div class="ps-marker">4</div>
+            <div class="ps-content">
+              <div class="ps-title">Act with complete confidence</div>
+              <div class="ps-desc">Every recommendation includes supporting evidence and projected impact. Fast decisions, backed by real data.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="process-visual reveal-r">
+        <div class="pv-card">
+          <div class="pvc-header">
+            <div class="pvc-title">Live signal feed</div>
+            <div class="pvc-badge">● Live</div>
+          </div>
+          <div class="pvc-signal">
+            <div class="pvcs-row">
+              <div class="pvcs-icon">⚡</div>
+              <div class="pvcs-text"><strong>High-value cohort detected</strong> — 240 users showing purchase intent signals</div>
+              <div class="pvcs-meta">Just now</div>
+            </div>
+            <div class="pvcs-row">
+              <div class="pvcs-icon">📉</div>
+              <div class="pvcs-text">Session depth dropping in <strong>mobile segment</strong> — investigate onboarding step 3</div>
+              <div class="pvcs-meta">4m ago</div>
+            </div>
+            <div class="pvcs-row">
+              <div class="pvcs-icon">🎯</div>
+              <div class="pvcs-text"><strong>A/B test reached significance</strong> — Variant B wins with 94% confidence</div>
+              <div class="pvcs-meta">12m ago</div>
+            </div>
+            <div class="pvcs-row">
+              <div class="pvcs-icon">✅</div>
+              <div class="pvcs-text">Revenue forecast updated — <strong>on track for monthly target</strong></div>
+              <div class="pvcs-meta">1h ago</div>
+            </div>
+          </div>
+        </div>
+        <div class="pv-float">
+          <div class="pvf-icon">📈</div>
+          <div>
+            <div class="pvf-label">Decision time saved</div>
+            <div class="pvf-val">67% faster</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="reveal-l">
+        <div class="section-label">
+          <span class="label-num">03</span>
+          <span class="label-text">Pricing</span>
+        </div>
+        <h2 class="section-title">Simple, honest<br><em>pricing.</em></h2>
+      </div>
+      <div class="reveal-r">
+        <p class="pricing-note">Start free for 14 days — no credit card required. Scale up as your team grows. Downgrade or cancel anytime without friction.</p>
+        <div class="pricing-toggle">
+          <div class="pt-opt active" id="ptMonthly">Monthly</div>
+          <div class="pt-opt" id="ptAnnual">Annual <span class="pt-save">−30%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-cards">
+      <div class="price-card reveal d1">
+        <div class="pc-name">Starter</div>
+        <div class="pc-price"><sup>$</sup><span id="p1">49</span></div>
+        <div class="pc-period" id="pp1">per month, billed monthly</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li>Up to 5 team members</li>
+          <li>10 data source connections</li>
+          <li>Real-time signal monitoring</li>
+          <li>Basic AI insights (10/day)</li>
+          <li>Email & Slack alerts</li>
+          <li class="off">Custom ML models</li>
+          <li class="off">Dedicated support</li>
+        </ul>
+        <a href="#" class="pc-cta outline">Start free trial</a>
+      </div>
+      <div class="price-card featured reveal d2">
+        <div class="pc-flag">Most Popular</div>
+        <div class="pc-name" style="color:rgba(255,255,255,0.55)">Growth</div>
+        <div class="pc-price" style="color:#fff"><sup>$</sup><span id="p2">149</span></div>
+        <div class="pc-period" id="pp2" style="color:rgba(255,255,255,0.5)">per month, billed monthly</div>
+        <div class="pc-divider" style="background:rgba(255,255,255,0.12)"></div>
+        <ul class="pc-features">
+          <li>Up to 25 team members</li>
+          <li>Unlimited data connections</li>
+          <li>Real-time + predictive engine</li>
+          <li>Unlimited AI insights daily</li>
+          <li>All channels + webhooks</li>
+          <li>Custom KPI builder</li>
+          <li class="off">Dedicated support</li>
+        </ul>
+        <a href="#" class="pc-cta white">Start free trial →</a>
+      </div>
+      <div class="price-card reveal d3">
+        <div class="pc-name">Enterprise</div>
+        <div class="pc-price" style="font-size:36px;padding-top:10px;line-height:1.2">Custom</div>
+        <div class="pc-period">tailored for your scale</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li>Unlimited team members</li>
+          <li>Unlimited data at any scale</li>
+          <li>Custom ML model training</li>
+          <li>Dedicated VPC deployment</li>
+          <li>HIPAA / SOC2 / GDPR</li>
+          <li>SSO, RBAC, full audit logs</li>
+          <li>24/7 dedicated SLA support</li>
+        </ul>
+        <a href="#" class="pc-cta outline">Talk to sales →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <div class="testi-header">
+      <div class="reveal-l">
+        <div class="section-label">
+          <span class="label-num">04</span>
+          <span class="label-text">Customer stories</span>
+        </div>
+        <h2 class="section-title">Real results,<br><em>real teams.</em></h2>
+      </div>
+      <div class="reveal-r">
+        <p class="section-body">From early-stage startups to enterprise orgs, Synapse reshapes how product teams think and move. Here's what they say.</p>
+      </div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card featured reveal d1">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"We went from weekly strategy reviews to daily decisions backed by real data. Synapse didn't just give us dashboards — it gave us intuition at scale."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">KL</div>
+          <div><div class="tc-name">Kayla Lim</div><div class="tc-role">VP Product @ Flux.io</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="tc-stars" style="color:var(--gold)">★★★★★</div>
+        <div class="tc-quote">"Our churn dropped 34% in 60 days. Synapse caught warning signals three weeks before we would have noticed them manually."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">MR</div>
+          <div><div class="tc-name">Marco Ruiz</div><div class="tc-role">CEO @ Parcel Labs</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d3">
+        <div class="tc-stars" style="color:var(--gold)">★★★★★</div>
+        <div class="tc-quote">"I replaced three separate tools and a full-time analyst. Setup took 40 minutes. The first insight that saved us money arrived the same afternoon."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">JP</div>
+          <div><div class="tc-name">Jess Park</div><div class="tc-role">Head of Growth @ Nimbus</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d4">
+        <div class="tc-stars" style="color:var(--gold)">★★★★★</div>
+        <div class="tc-quote">"The predictive engine is uncanny. It flagged a segment issue 48 hours before it would have hit production. Saved us a very difficult week."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">AS</div>
+          <div><div class="tc-name">Aria Singh</div><div class="tc-role">CTO @ Stellar HQ</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d5">
+        <div class="tc-stars" style="color:var(--gold)">★★★★★</div>
+        <div class="tc-quote">"Enterprise rollout across 80+ tools. Zero friction, zero data engineering required. The integrations just work — and that's extraordinary."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">DK</div>
+          <div><div class="tc-name">Daniel Kovacs</div><div class="tc-role">CIO @ Meridian Financial</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d6">
+        <div class="tc-stars" style="color:var(--gold)">★★★★★</div>
+        <div class="tc-quote">"We tripled our experimentation velocity. Synapse tells us which tests to run — not just what happened after we ran them. That's a different category."</div>
+        <div class="tc-author">
+          <div class="tc-avatar">NW</div>
+          <div><div class="tc-name">Nia Williams</div><div class="tc-role">Director of Data @ Opal</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta-section">
+  <div class="container">
+    <div class="cta-layout">
+      <div class="cta-left reveal-l">
+        <div class="section-label">
+          <span class="label-num">05</span>
+          <span class="label-text">Get started</span>
+        </div>
+        <h2 class="section-title">Your team<br>deserves to<br><em>know first.</em></h2>
+        <p class="section-body">Join 4,200+ product teams who stopped reacting and started predicting. Deploy in an afternoon, see value the same day.</p>
+        <div class="cta-actions">
+          <a href="#pricing" class="btn-primary-lg">
+            Start your free trial
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="btn-nav-ghost" style="padding:16px 28px;font-size:15px">Book a demo</a>
+        </div>
+        <div class="cta-fine">14-day free trial · No credit card required · Cancel anytime</div>
+      </div>
+      <div class="cta-right reveal-r">
+        <div class="cta-card">
+          <div class="cc-icon sage">🔗</div>
+          <div>
+            <div class="cc-label">Connect in minutes</div>
+            <div class="cc-desc">200+ one-click integrations. Your data stays in your stack — Synapse just reads the signals.</div>
+          </div>
+        </div>
+        <div class="cta-card">
+          <div class="cc-icon terra">📊</div>
+          <div>
+            <div class="cc-label">First insight within hours</div>
+            <div class="cc-desc">Most teams receive their first meaningful AI insight within 2 hours of connecting their data sources.</div>
+          </div>
+        </div>
+        <div class="cta-card">
+          <div class="cc-icon gold">🛡️</div>
+          <div>
+            <div class="cc-label">Enterprise-ready from day one</div>
+            <div class="cc-desc">SOC 2, GDPR, HIPAA. Security that meets the bar for the biggest teams — available on every plan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="4" cy="4" r="2" fill="white"/>
+            <circle cx="10" cy="10" r="2" fill="white"/>
+            <path d="M4 4 Q7 3 10 10" stroke="white" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        Synapse AI
+      </div>
+      <p class="footer-tagline">The operational intelligence platform for teams that can't afford to be wrong.</p>
+      <div class="footer-soc">
+        <a href="#" class="fsoc">𝕏</a>
+        <a href="#" class="fsoc">in</a>
+        <a href="#" class="fsoc">GH</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <a href="#">Platform</a>
+      <a href="#">Integrations</a>
+      <a href="#">Pricing</a>
+      <a href="#">Changelog</a>
+      <a href="#">Roadmap</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <a href="#">Documentation</a>
+      <a href="#">API Reference</a>
+      <a href="#">Status</a>
+      <a href="#">Security</a>
+      <a href="#">Community</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Synapse AI, Inc. All rights reserved. — Designed & built by <span style="color:rgba(245,240,232,0.6)">Bryan Hernandez</span></div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => observer.observe(el));
+
+const prices = {monthly: [49, 149], annual: [34, 104]};
+const periods = {
+  monthly: 'per month, billed monthly',
+  annual: 'per month, billed annually'
+};
+
+function animCount(id, target) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const start = parseInt(el.textContent) || 0;
+  const dur = 380;
+  const t0 = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - t0) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(start + (target - start) * e);
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+
+document.getElementById('ptMonthly').addEventListener('click', function() {
+  this.classList.add('active');
+  document.getElementById('ptAnnual').classList.remove('active');
+  animCount('p1', prices.monthly[0]);
+  animCount('p2', prices.monthly[1]);
+  document.getElementById('pp1').textContent = periods.monthly;
+  document.getElementById('pp2').textContent = periods.monthly;
+});
+
+document.getElementById('ptAnnual').addEventListener('click', function() {
+  this.classList.add('active');
+  document.getElementById('ptMonthly').classList.remove('active');
+  animCount('p1', prices.annual[0]);
+  animCount('p2', prices.annual[1]);
+  document.getElementById('pp1').textContent = periods.annual;
+  document.getElementById('pp2').textContent = periods.annual;
+});
+</script>
+</body>
+</html>
